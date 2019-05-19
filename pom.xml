@@ -1,25 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jvnet.jaxb2.maven2</groupId>
-	<artifactId>maven-jaxb2-plugin-project</artifactId>
+	<groupId>org.hisrc.xjc</groupId>
+	<artifactId>xjc21-maven-plugin-project</artifactId>
 	<version>0.14.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Maven JAXB 2.x Plugin Project</name>
-	<description>Maven2 plugin for JAXB 2.x XJC compiler to generate Java sources from XML Schemas.</description>
-	<url>https://github.com/highsource/maven-jaxb2-plugin</url>
+	<name>XJC 2.1 Maven Plugin Project</name>
+	<description>XJC 2.1 Maven Plugin generates Java sources from XML Schemas.</description>
+	<url>https://github.com/xjc-maven-plugin/xjc21</url>
 	<licenses>
 		<license>
 			<name>BSD-Style License</name>
-			<url>https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE</url>
+			<url>https://github.com/xjc-maven-plugin/xjc21/blob/master/LICENSE</url>
 			<distribution>repo</distribution>
 			<comments>Maven JAXB2 Plugin license is the 3-clause BSD license which is compatible with GPL. Maven JAXB2 Plugin license does not require you to include any acknowledgments for Maven JAXB2 Plugin in advertising materials for your software.</comments>
 		</license>
 	</licenses>
 	<inceptionYear>2006</inceptionYear>
 	<scm>
-		<connection>scm:svn:https://svn.java.net/svn/maven-jaxb2-plugin~svn/trunk</connection>
-		<developerConnection>scm:svn:https://svn.java.net/svn/maven-jaxb2-plugin~svn/trunk</developerConnection>
-		<url>http://java.net/projects/maven-jaxb2-plugin/sources/svn/show/trunk</url>
+		<connection>scm:git:https://github.com/xjc-maven-plugin/xjc21.git</connection>
+		<developerConnection>scm:git:https://github.com/xjc-maven-plugin/xjc21.git</developerConnection>
+		<url>https://github.com/xjc-maven-plugin/xjc21/tree/${project.version}</url>
 	</scm>
 	<developers>
 		<developer>
@@ -32,58 +32,19 @@
 		</developer>
 	</developers>
 	<modules>
-		<module>plugin-core</module>
-		<module>plugin-2.0</module>
-		<module>plugin-2.1</module>
-		<module>plugin-2.2</module>
-		<module>plugin-2.3</module>
 		<module>plugin</module>
-		<module>testing</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.version>2.0.9</maven.version>
-		<jaxb20.version>2.0.5</jaxb20.version>
-		<jaxb21.version>2.1.13</jaxb21.version>
-		<jaxb22.version>2.2.11</jaxb22.version>
-		<jaxb23.version>2.3.1</jaxb23.version>
-		<jaxb-api.version>2.3.1</jaxb-api.version>
-		<jaxb.version>${jaxb23.version}</jaxb.version>
-		<stax-ex.version>1.7.8</stax-ex.version>
-		<fastinfoset.version>1.2.13</fastinfoset.version>
-		<xsom.version>20140925</xsom.version>
-		<dtd-parser.version>1.2</dtd-parser.version>
-		<istack.version>3.0.5</istack.version>
+		<jaxb-api.version>2.1</jaxb-api.version>
+		<jaxb.version>2.1.13</jaxb.version>
 		<activation.version>1.2.0</activation.version>
-		<jaxb2-basics.version>0.12.0</jaxb2-basics.version>
 		<maven.plugin.testing.version>2.1</maven.plugin.testing.version>
 		<maven.plugin.plugin.version>3.5</maven.plugin.plugin.version>
 		<slf4j.version>1.7.25</slf4j.version>
 	</properties>
 	<profiles>
-		<profile>
-			<id>samples</id>
-			<activation>
-				<property>
-					<name>samples</name>
-				</property>
-			</activation>
-			<modules>
-				<module>samples</module>
-				<module>dist</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>tests</id>
-			<activation>
-				<property>
-					<name>tests</name>
-				</property>
-			</activation>
-			<modules>
-				<module>tests</module>
-			</modules>
-		</profile>
 		<profile>
 			<id>all</id>
 			<activation>
@@ -92,8 +53,6 @@
 				</property>
 			</activation>
 			<modules>
-				<module>dist</module>
-				<module>samples</module>
 				<module>tests</module>
 			</modules>
 		</profile>
@@ -143,12 +102,6 @@
 			</build>
 		</profile>
 	</profiles>
-	<!--distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement-->
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -170,129 +123,46 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.glassfish.jaxb</groupId>
-				<artifactId>jaxb-runtime</artifactId>
-				<version>${jaxb.version}</version>
-			</dependency>
-			<!-- Start of jaxb-runtime dependencies -->
-			<dependency>
-				<groupId>org.glassfish.jaxb</groupId>
-				<artifactId>jaxb-core</artifactId>
-				<version>${jaxb.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>javax.xml.bind</groupId>
 				<artifactId>jaxb-api</artifactId>
 				<version>${jaxb-api.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.glassfish.jaxb</groupId>
-				<artifactId>txw2</artifactId>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
 				<version>${jaxb.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.istack</groupId>
-				<artifactId>istack-commons-runtime</artifactId>
-				<version>${istack.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jvnet.staxex</groupId>
-				<artifactId>stax-ex</artifactId>
-				<version>${stax-ex.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.xml.fastinfoset</groupId>
-				<artifactId>FastInfoset</artifactId>
-				<version>${fastinfoset.version}</version>
-			</dependency>
-			<!-- End of jaxb-runtime dependencies -->
-
-			<dependency>
-				<groupId>org.glassfish.jaxb</groupId>
-				<artifactId>jaxb-xjc</artifactId>
-				<version>${jaxb.version}</version>
-			</dependency>
-
-			<!-- Start jaxb-xjc dependencies -->
-			<dependency>
-				<groupId>com.sun.xsom</groupId>
-				<artifactId>xsom</artifactId>
-				<version>${xsom.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.glassfish.jaxb</groupId>
-				<artifactId>codemodel</artifactId>
-				<version>${jaxb.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.xml.bind.external</groupId>
-				<artifactId>rngom</artifactId>
-				<version>${jaxb.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.xml.dtd-parser</groupId>
-				<artifactId>dtd-parser</artifactId>
-				<version>${dtd-parser.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.istack</groupId>
-				<artifactId>istack-commons-tools</artifactId>
-				<version>${istack.version}</version>
 				<exclusions>
 					<exclusion>
-						<groupId>org.apache.ant</groupId>
-						<artifactId>ant</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.sun</groupId>
-						<artifactId>tools</artifactId>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-core</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-xjc</artifactId>
+				<version>${jaxb.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.org.apache.xml.internal</groupId>
+				<artifactId>resolver</artifactId>
+				<version>20050927</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sun.activation</groupId>
 				<artifactId>javax.activation</artifactId>
 				<version>${activation.version}</version>
 			</dependency>
-			<!-- End of jaxb-xjc dependencies -->
+
 			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-extra-osgi</artifactId>
-				<version>${jaxb.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb20-plugin</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb21-plugin</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb22-plugin</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb23-plugin</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin-testing</artifactId>
+				<groupId>org.hisrc.xjc</groupId>
+				<artifactId>xjc21-maven-plugin</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<!-- Maven plugin and api classes -->
@@ -381,13 +251,6 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
-			<!-- JAXB2 Basics -->
-			<dependency>
-				<groupId>org.jvnet.jaxb2_commons</groupId>
-				<artifactId>jaxb2-basics-runtime</artifactId>
-				<version>${jaxb2-basics.version}</version>
-			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 	<build>
